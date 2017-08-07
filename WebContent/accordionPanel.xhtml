@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<script type="text/javascript">
+	function handleChange(panel) {
+
+
+alert("before");
+		}
+
+	function handleshow(panel) {
+
+alert("After ");
+		
+	}
+	function handleclose(panel) {
+		alert("Close");
+	}
+
+	</script>
+
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:accordionPanel dynamic="true" value="#{panel.accordionpabel}"
+			var="list" multiple="true">
+			<!-- onTabChange="handleChange(panel)" -->
+			<!-- 			onTabShow="handleshow(panel)" onTabClose="handleclose(panel)" -->
+			<p:ajax event="tabChange" listener="#{panel.onchange}" />
+			<p:ajax event="tabClose" listener="#{panel.onclose}" />
+
+			<!-- disabled="true" -->
+			<p:tab title="#{list.title}">
+				<h:outputText value="#{list.body}" />
+
+			</p:tab>
+		
+//any number of tabs
+</p:accordionPanel>
+
+	</h:form>
+
+
+
+</h:body>
+
+
+</html>

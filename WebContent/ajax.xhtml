@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+
+<h:body>
+********************* key up  ***************
+	<h:form>
+
+		<p:inputText value="#{ajaxBean.text}">
+			<p:ajax update="out" listener="#{ajaxBean.increment}" event="keyup" />
+		</p:inputText>
+		<p:outputLabel id="out" value="#{ajaxBean.text}" />
+	</h:form>
+	********************* Blur event  ***************
+	<h:form>
+
+		<p:inputText value="#{ajaxBean.text}">
+			<p:ajax update="out" event="blur" />
+		</p:inputText>
+		<p:outputLabel id="out" value="#{ajaxBean.text}" />
+	</h:form>
+
+	<br></br>
+	<br></br>
+*********************Listsner***************
+
+
+<h:form>
+		<p:inputText value="#{ajaxBean.text}">
+			<p:ajax update="out" event="keyup" listener="#{ajaxBean.uppercase}"></p:ajax>
+		</p:inputText>
+		<p:outputLabel id="out" value="#{ajaxBean.text}"></p:outputLabel>
+	</h:form>
+
+
+	<h:form>
+
+		<h:panelGrid columns="4" cellpadding="5">
+			<h:outputLabel for="name" value="Name:" style="font-weight:bold" />
+			<p:inputText id="name" value="#{ajaxBean.text}" />
+			<p:commandButton value="Submit" update="display" icon="ui-icon-check" />
+			<h:outputText id="display" value="#{ajaxBean.text}" />
+		</h:panelGrid>
+
+	</h:form>
+
+</h:body>
+
+
+</html>
