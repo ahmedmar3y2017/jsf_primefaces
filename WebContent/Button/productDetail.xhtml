@@ -5,26 +5,29 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-
-
-</h:head>
-
+<h:head></h:head>
 
 <h:body>
 
-
 	<h:form>
+		<f:metadata>
+			<f:viewParam name="productId" value="#{productDetailView.productId}" />
+		</f:metadata>
 
-		<p:commandLink value="accordionPanel" action="accordionPanel"></p:commandLink>
+...
 
-		<br></br>
-		<p:commandLink value="Ajax" action="ajax"></p:commandLink>
-		<br></br>
-		<p:commandLink value="menuSelect" action="menuSelect"></p:commandLink>
+
+<p>
+			You've been redirected to this bookmarkable page with button.
+			ViewParameter you've passed is <strong>"
+				#{productDetailView.productId}"</strong>
+		</p>
+
+
 
 	</h:form>
 
-
 </h:body>
+
+
 </html>

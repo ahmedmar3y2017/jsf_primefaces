@@ -5,26 +5,27 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-
-
-</h:head>
-
+<h:head></h:head>
 
 <h:body>
 
 
 	<h:form>
+		<p:growl id="msgs" showDetail="true" />
+		<p:outputLabel for="effect" value="Effect:" />
+		<p:calendar id="effect" value="#{calender.date}" effect="fold"
+			pattern="dd-MM-yyyy" mask="true">
 
-		<p:commandLink value="accordionPanel" action="accordionPanel"></p:commandLink>
 
-		<br></br>
-		<p:commandLink value="Ajax" action="ajax"></p:commandLink>
-		<br></br>
-		<p:commandLink value="menuSelect" action="menuSelect"></p:commandLink>
+			<p:ajax event="dateSelect" listener="#{calender.onDateSelect}"
+				update="msgs" />
+
+		</p:calendar>
+
 
 	</h:form>
 
-
 </h:body>
+
+
 </html>

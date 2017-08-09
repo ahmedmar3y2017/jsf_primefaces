@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<style type="text/css">
+.st {
+	color: red;
+}
+</style>
+
+</h:head>
+
+<h:body>
+
+	<h:form>
+		<p:messages id="msg" showDetail="true"></p:messages>
+
+		<h:outputLabel styleClass="st" for="multiple" value="Multiple:" />
+		<p:selectCheckboxMenu id="multiple"
+			value="#{checkboxView.selectedCities}" label="Cities" multiple="true"
+			filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+			<f:selectItems value="#{checkboxView.cities}" />
+		</p:selectCheckboxMenu>
+
+
+		<p:commandButton value="click" update="msg"
+			actionListener="#{checkboxView.display}"></p:commandButton>
+
+	</h:form>
+
+
+
+
+</h:body>
+
+
+</html>

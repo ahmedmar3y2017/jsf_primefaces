@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+
+	<p:ajaxStatus style="display:block;margin-bottom:2em;height:24px;">
+		<f:facet name="default">
+			<h:outputText value="Status: StandBy" />
+		</f:facet>
+
+		<f:facet name="start">
+			<p:graphicImage name="/demo/images/ajaxloadingbar.gif" />
+		</f:facet>
+
+		<f:facet name="complete">
+			<h:outputText value="Status: Completed" />
+		</f:facet>
+	</p:ajaxStatus>
+
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
+
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage name="Loading_icon.gif" />
+	</p:dialog>
+
+	<h:form>
+		<p:commandButton value="Send" icon="ui-icon-refresh" />
+	</h:form>
+
+*************************** remote command --------------------------------
+<h:form>
+		<p:remoteCommand name="rc" update="msgs"
+			actionListener="#{ajaxBean.execute}" />
+
+		<p:growl id="msgs" showDetail="true" />
+		<p:commandButton type="button" onclick="rc()" value="Execute"
+			icon="ui-icon-refresh" />
+	</h:form>
+
+
+
+</h:body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+
+
+<h:form>
+
+	<p:log />
+
+	<h:panelGrid columns="5" cellpadding="5">
+		<h:outputLabel for="name" value="Name:" style="font-weight:bold" />
+		<p:inputText id="name" value="#{ajaxBean.firstname}">
+			<p:ajax event="keyup" update="ooo" ></p:ajax>
+		</p:inputText>
+		<p:commandButton value="False" partialSubmit="false" process="name" />
+		<p:commandButton value="True" partialSubmit="true" process="name" />
+	</h:panelGrid>
+	<p:outputLabel id="ooo" value="#{ajaxBean.firstname}"></p:outputLabel>
+
+</h:form>
+
+</html>

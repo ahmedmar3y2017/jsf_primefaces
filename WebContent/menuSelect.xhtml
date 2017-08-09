@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+
+
+	<h:form>
+	
+<!-- 		<p:messages id="msgs" showDetail="true"></p:messages> -->
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:panelGrid columns="2" cellpadding="5">
+			<p:outputLabel for="country" value="Country : "></p:outputLabel>
+			<p:selectOneMenu id="country" value="#{ajaxmenu.country}"
+				style="width:150px">
+				<p:ajax listener="#{ajaxmenu.onchange}" update="city" />
+
+				<f:selectItem itemValue="" itemLabel="Select country : "
+					noSelectionOption="true" />
+				<f:selectItems value="#{ajaxmenu.listCountry}" />
+			</p:selectOneMenu>
+
+
+			<p:outputLabel for="city" value="City : "></p:outputLabel>
+			<p:selectOneMenu id="city" value="#{ajaxmenu.city}"
+				style="width:150px">
+				<f:selectItem itemValue="" itemLabel="Select City : "
+					noSelectionOption="true" />
+				<f:selectItems value="#{ajaxmenu.listCity}" />
+			</p:selectOneMenu>
+
+		</p:panelGrid>
+		<p:separator />
+
+		<p:commandButton value="Submit" update="msgs"
+			actionListener="#{ajaxmenu.displayLocation}" icon="ui-icon-check" />
+
+	</h:form>
+
+</h:body>
+</html>

@@ -5,26 +5,18 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-
-
-</h:head>
-
+<h:head></h:head>
 
 <h:body>
 
-
 	<h:form>
-
-		<p:commandLink value="accordionPanel" action="accordionPanel"></p:commandLink>
-
-		<br></br>
-		<p:commandLink value="Ajax" action="ajax"></p:commandLink>
-		<br></br>
-		<p:commandLink value="menuSelect" action="menuSelect"></p:commandLink>
+		<p:link outcome="productDetail" value="Bookmark">
+			<f:param name="productId" value="10" />
+		</p:link>
 
 	</h:form>
 
-
 </h:body>
+
+
 </html>

@@ -36,7 +36,64 @@
 		</p:inputText>
 		<p:outputLabel id="out" value="#{ajaxBean.text}"></p:outputLabel>
 	</h:form>
+*********************Conter***************
+<h:form>
 
+		<p:panelGrid columns="2">
+			<p:outputLabel value="Counter : "></p:outputLabel>
+			<p:outputLabel id="cc" value="#{ajaxBean.number}"></p:outputLabel>
+
+		</p:panelGrid>
+		<br></br>
+		<p:commandButton value="increment"
+			actionListener="#{ajaxBean.increment}" update="cc"></p:commandButton>
+	</h:form>
+*************************** process ************************
+<h:form>
+
+
+		<p:panelGrid id="grid" columns="2" cellpadding="5"
+			style="margin-bottom:10px">
+
+			<f:facet name="header">
+				<p:messages id="messg"></p:messages>
+
+			</f:facet>
+
+			<p:outputLabel for="firstname" value="FirstName : "></p:outputLabel>
+			<p:inputText id="firstname" value="#{ajaxBean.firstname}"></p:inputText>
+
+			<p:outputLabel for="lastname" value="LastName : "></p:outputLabel>
+			<p:inputText id="lastname" value="#{ajaxBean.lastname}"
+				required="true" requiredMessage="Lastname is requied"></p:inputText>
+
+
+
+
+		</p:panelGrid>
+
+		<p:panelGrid columns="6" cellpadding="5">
+
+
+			<p:commandButton value="all" update="grid" id="all" process="@all"
+				actionListener="#{ajaxBean.save}"></p:commandButton>
+			<p:commandButton value="form" update="grid" id="form" process="@form"
+				actionListener="#{ajaxBean.save}"></p:commandButton>
+			<p:commandButton value="this" update="grid" id="this" process="@this"
+				actionListener="#{ajaxBean.save}"></p:commandButton>
+			<p:commandButton value="none" update="grid" id="none" process="@none"
+				actionListener="#{ajaxBean.save}"></p:commandButton>
+			<p:commandButton value="parent" update="grid" id="parent"
+				process="parent" actionListener="#{ajaxBean.save}"></p:commandButton>
+			<p:commandButton value="llastname" update="grid" id="llastname"
+				process="@this,lastname" actionListener="#{ajaxBean.save}"></p:commandButton>
+		</p:panelGrid>
+
+
+	</h:form>
+
+
+*********************************************
 
 	<h:form>
 

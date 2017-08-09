@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+
+
+<h:body>
+
+
+	<h:form>
+
+		<p:growl id="msg" />
+
+		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+			<h:outputText value="Basic: " />
+			<p:inputSwitch value="#{selectBooleanView.value1}" />
+
+			<h:outputText value="Ajax: " />
+			<p:inputSwitch value="#{selectBooleanView.value2}">
+				<p:ajax listener="#{selectBooleanView.addMessage}" update="msg" />
+			</p:inputSwitch>
+		</h:panelGrid>
+
+	</h:form>
+
+</h:body>
+
+
+</html>
