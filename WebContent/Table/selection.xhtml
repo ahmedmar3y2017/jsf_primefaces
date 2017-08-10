@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+
+<h:body>
+
+
+	<h:form id="form">
+		<p:dataTable var="emp" value="#{employeeView.employees}" rows="5"
+			paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15" sortMode="multiple"
+			widgetVar="carsTable"
+			emptyMessage="No cars found with given criteria"
+			filteredValue="#{employeeView.filterEmployee}">
+			<f:facet name="header">
+			All Empoyees 
+			</f:facet>
+			<p:ajax event="sort" skipChildren="false" />
+
+			<p:column filterBy="#{emp.id}" footerText="contains"
+				filterMatchMode="contains" headerText="Id" sortBy="#{emp.id}">
+				<h:outputText value="#{emp.id}" />
+			</p:column>
+
+			<p:column filterBy="#{emp.username}" footerText="exact"
+				filterMatchMode="exact" headerText="username"
+				sortBy="#{emp.username}">
+
+				<f:facet name="filter">
+					<p:selectOneMenu onchange="PF('carsTable').filter()">
+						<f:selectItem itemLabel="Select One" itemValue="#{null}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{employeeView.filters}" />
+					</p:selectOneMenu>
+				</f:facet>
+
+				<h:outputText value="#{emp.username}" />
+			</p:column>
+
+			<p:column filterBy="#{emp.address}" footerText="in"
+				filterMatchMode="in" headerText="address" sortBy="#{emp.address}">
+
+				<f:facet name="filter">
+					<p:selectCheckboxMenu label="Address"
+						onchange="PF('carsTable').filter()" panelStyle="width:125px"
+						scrollHeight="150">
+						<f:selectItems value="#{employeeView.filtersAddress}" />
+					</p:selectCheckboxMenu>
+				</f:facet>
+
+
+				<h:outputText value="#{emp.address}" />
+			</p:column>
+
+			<p:column filterBy="#{emp.color}" footerText="equals"
+				filterMatchMode="equals" headerText="Color" sortBy="#{emp.color}">
+				<f:facet name="filter">
+					<p:selectOneButton onchange="PF('carsTable').filter()">
+						<f:converter converterId="javax.faces.Boolean" />
+						<f:selectItem itemLabel="All" itemValue="" />
+						<f:selectItem itemLabel="Green" itemValue="true" />
+						<f:selectItem itemLabel="Red" itemValue="false" />
+					</p:selectOneButton>
+				</f:facet>
+
+
+				<h:outputText value="#{emp.color}" />
+			</p:column>
+			<p:column style="width:32px;text-align: center">
+				<p:commandButton update=":form:carDetail"
+					oncomplete="PF('carDialog').show()" icon="ui-icon-search"
+					title="View">
+					<f:setPropertyActionListener value="#{emp}"
+						target="#{employeeView.selectEmployee}" />
+				</p:commandButton>
+			</p:column>
+
+
+			<f:facet name="footer">
+			</f:facet>
+		</p:dataTable>
+
+
+
+
+
+
+		<p:dialog header="Car Info" widgetVar="carDialog" modal="true"
+			showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="carDetail" style="text-align:center;">
+				<p:panelGrid columns="2"
+					rendered="#{not empty employeeView.selectEmployee}"
+					columnClasses="label,value">
+					<f:facet name="header">
+						<p:graphicImage library="images" name="ddd.png" />
+
+					</f:facet>
+
+					<h:outputText value="Id:" />
+					<h:outputText value="#{employeeView.selectEmployee.id}" />
+
+					<h:outputText value="UserName: " />
+					<h:outputText value="#{employeeView.selectEmployee.username}" />
+
+					<h:outputText value="Address:" />
+					<h:outputText value="#{employeeView.selectEmployee.address}"
+						style="color:#{dtSelectionView.selectedCar.color}" />
+
+					<h:outputText value="Color" />
+					<h:outputText value="$#{employeeView.selectEmployee.color}" />
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+
+
+	</h:form>
+
+</h:body>
+
+
+</html>

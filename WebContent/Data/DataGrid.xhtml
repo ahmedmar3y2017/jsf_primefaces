@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+
+<h:body>
+
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:dataGrid var="emp" value="#{employeeView.employees}" columns="3"
+			layout="grid" rows="12" paginator="true" id="cars"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="6,12,16">
+
+			<f:facet name="header">
+            Cars for Sale
+        </f:facet>
+
+			<p:panel header="#{emp.id}" style="text-align:center">
+				<h:panelGrid columns="1" style="width:100%">
+					<p:graphicImage library="images" name="ddd.png" />
+
+					<h:outputText value="#{emp.username}" />
+
+					<p:commandLink title="View Detail"
+						actionListener="#{employeeView.display(emp)}" update=":form:msgs">
+						<h:outputText styleClass="ui-icon ui-icon-search"
+							style="margin:0 auto;" />
+
+					</p:commandLink>
+				</h:panelGrid>
+			</p:panel>
+
+		</p:dataGrid>
+
+
+
+	</h:form>
+
+
+</h:body>
+
+
+</html>

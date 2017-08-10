@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+
+<h:body>
+	<h:form id="form">
+
+		<p:dataList value="#{employeeView.employees}" var="emp"
+			type="unordered" itemType="none" paginator="true" rows="10"
+			styleClass="paginated">
+			<f:facet name="header">
+            Paginator
+        </f:facet>
+			<p:commandLink update=":form:carDetail"
+				oncomplete="PF('carDialog').show()" title="View Detail"
+				styleClass="ui-icon ui-icon-search"
+				style="float:left;margin-right:10px">
+				<f:setPropertyActionListener value="#{emp}"
+					target="#{employeeView.selectEmployee}" />
+				<h:outputText value="#{emp.id}, #{emp.username}" />
+			</p:commandLink>
+			<h:outputText value="#{emp.id}, #{emp.username}"
+				style="display:inline-block" />
+		</p:dataList>
+
+
+
+		<p:dialog header="Car Info" widgetVar="carDialog" modal="true"
+			showEffect="blind" hideEffect="explode" resizable="false">
+			<p:outputPanel id="carDetail" style="text-align:center;">
+				<p:panelGrid columns="2"
+					rendered="#{not empty employeeView.selectEmployee}"
+					columnClasses="label,value">
+					<f:facet name="header">
+						<p:graphicImage library="images" name="ddd.png" />
+
+					</f:facet>
+
+					<h:outputText value="Id:" />
+					<h:outputText value="#{employeeView.selectEmployee.id}" />
+
+					<h:outputText value="Year" />
+					<h:outputText value="#{employeeView.selectEmployee.username}" />
+
+					<h:outputText value="Color:" />
+					<h:outputText value="#{employeeView.selectEmployee.address}"
+						style="color:#{dataListView.selectedCar.color}" />
+
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+
+
+
+	</h:form>
+</h:body>
+
+
+</html>
