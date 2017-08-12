@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+
+
+<h:body>
+	<h:form>
+
+
+
+		<h3>On-Demand Data</h3>
+		<p:dataTable var="emp" value="#{employeeView.employees}"
+			scrollRows="10" scrollable="true" liveScroll="true" scrollHeight="50">
+
+			<p:column headerText="Id" footerText="Id">
+				<h:outputText value="#{emp.id}" />
+			</p:column>
+			<p:column headerText="username" footerText="username">
+				<h:outputText value="#{emp.username}" />
+			</p:column>
+			<p:column headerText="address" footerText="address">
+				<h:outputText value="#{emp.address}" />
+			</p:column>
+			<p:column headerText="Color" footerText="Color">
+				<h:outputText value="#{emp.color}" />
+			</p:column>
+		</p:dataTable>
+
+		<h3>Virtual Scrolling - drag column row - display column and
+			delete by right click - select columns appear - pdf excel download</h3>
+		<p:dataTable id="employees" var="emp"
+			value="#{employeeView.employees}" scrollRows="10" scrollable="true"
+			virtualScroll="true" scrollHeight="100"
+			rowStyleClass="#{emp.id le 20 ? 'old' : null}"
+			resizableColumns="true" draggableColumns="true" draggableRows="true"
+			rowKey="#{emp.id}" selection="#{employeeView.selectEmployee}"
+			selectionMode="single">
+			<f:facet name="header">
+        List of Employees
+    <div style="float: right">
+					<h:commandLink>
+						<p:graphicImage library="images" name="excel.png" width="24" />
+						<p:dataExporter type="xls" target="employees" fileName="Employees"
+							options="#{employeeView.excelOpt}"
+							postProcessor="#{employeeView.postProcessXLS}" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage library="images" name="pdf.png" width="24" />
+						<p:dataExporter type="pdf" target="employees" fileName="Employees"
+							options="#{employeeView.pdfOpt}"
+							preProcessor="#{employeeView.preProcessPDF}" />
+					</h:commandLink>
+				</div>
+				<p:commandButton id="toggler" type="button" value="Columns"
+					style="float:right" icon="ui-icon-calculator" />
+				<p:columnToggler datasource="employees" trigger="toggler" />
+			</f:facet>
+			<p:column headerText="Id" footerText="Id">
+				<h:outputText value="#{emp.id}" />
+			</p:column>
+			<p:column headerText="username" footerText="username">
+				<h:outputText value="#{emp.username}" />
+			</p:column>
+			<p:column headerText="address" footerText="address">
+				<h:outputText value="#{emp.address}" />
+			</p:column>
+			<p:column headerText="Color" footerText="Color">
+				<h:outputText value="#{emp.color}" />
+			</p:column>
+		</p:dataTable>
+
+		<p:contextMenu for="employees">
+			<p:menuitem value="View" update="carDetail" icon="ui-icon-search"
+				oncomplete="PF('carDialog').show()" />
+			<p:menuitem value="Delete" update="employees" icon="ui-icon-close"
+				actionListener="#{employeeView.deleteEmp}" />
+		</p:contextMenu>
+
+		<p:dialog header="Emp Info" widgetVar="carDialog" modal="true"
+			showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="carDetail" style="text-align:center;">
+				<p:panelGrid columns="2"
+					rendered="#{not empty employeeView.selectEmployee}"
+					columnClasses="label,value">
+					<f:facet name="header">
+						<p:graphicImage library="images" name="ddd.png" />
+
+					</f:facet>
+
+					<h:outputText value="Id:" />
+					<h:outputText value="#{employeeView.selectEmployee.id}" />
+
+					<h:outputText value="username" />
+					<h:outputText value="#{employeeView.selectEmployee.username}" />
+
+					<h:outputText value="Color:" />
+					<h:outputText value="#{employeeView.selectEmployee.color}"
+						style="color:#{employeeView.selectEmployee.color}" />
+
+					<h:outputText value="address" />
+					<h:outputText value="$#{employeeView.selectEmployee.address}" />
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+
+
+
+	</h:form>
+</h:body>
+</html>

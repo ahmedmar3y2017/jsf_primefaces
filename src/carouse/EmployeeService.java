@@ -6,7 +6,7 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
-@ManagedBean(name="empservice")
+@ManagedBean(name = "empservice")
 @ApplicationScoped
 public class EmployeeService {
 
@@ -31,7 +31,7 @@ public class EmployeeService {
 
 		List<Employee> seEmployees = new ArrayList<>();
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 100; i++) {
 
 			seEmployees.add(new Employee(i, "user" + i, "pass" + i, "add" + i, getRandomColor()));
 

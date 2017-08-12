@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<style>
+.layout {
+	min-width: 100px;
+	min-height: 100px;
+}
+</style>
+
+</h:head>
+
+<h:body>
+
+	<h:form>
+
+		<p:layout id="layout" styleClass="layout">
+			<p:layoutUnit position="west" resizable="true" size="100"
+				minSize="40" maxSize="200">
+				<h3>Ajax</h3>
+				<p:tree value="#{treeView.root}" var="node" dynamic="true">
+					<p:treeNode>
+						<h:outputText value="#{node}" />
+					</p:treeNode>
+				</p:tree>
+
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center">
+				<h3>On-Demand Loading</h3>
+				<p:accordionPanel dynamic="true" cache="true">
+					<p:tab title="Godfather Part I">
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage library="images" name="excel.png" width="24" />
+							<h:outputText value="The story begins as Don Vito Corleone..." />
+						</h:panelGrid>
+					</p:tab>
+					<p:tab title="Godfather Part II">
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage library="images" name="excel.png" width="24" />
+							<h:outputText value="Francis Ford Coppola's legendary..." />
+						</h:panelGrid>
+					</p:tab>
+					<p:tab title="Godfather Part III">
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage library="images" name="excel.png" width="24" />
+							<h:outputText value="After a break of more than 15 years..." />
+						</h:panelGrid>
+					</p:tab>
+				</p:accordionPanel>
+			</p:layoutUnit>
+		</p:layout>
+	</h:form>
+
+</h:body>
+
+
+</html>
